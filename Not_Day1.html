@@ -1,0 +1,166 @@
+<script>
+/* Day 1 To do list
+Part 1
+[/] Convert array of strings (splitted by a line) to array of numbers
+[/] Calculate each numbers by the formula divided by 3 (rounded down) then minus 2 
+[/] SUM all of the numbers.. (but still don't get it. ="=)
+
+Part 2
+[/] loop formula divided by 3 (rounded down) then minus 2 until the number is zero or negative
+[/] SUM all of the results
+*/
+
+console.log("test");
+
+// mass number in an array of strings. Have to use backtick for multi-lines.
+var massString = `133260
+119757
+96870
+121480
+117382
+55048
+69153
+62034
+91338
+103765
+83785
+131184
+104233
+110416
+148887
+99294
+74823
+57239
+81762
+82823
+145571
+145651
+137455
+133118
+110781
+95863
+142314
+76372
+69844
+137365
+132652
+142302
+69939
+143053
+149392
+147016
+129061
+87660
+66276
+64079
+125333
+51086
+75200
+113872
+115114
+104887
+131348
+75771
+96196
+107870
+81992
+120446
+67121
+138297
+95714
+124640
+85661
+126056
+147826
+61260
+93073
+140265
+148180
+110608
+122923
+84648
+59543
+60255
+138945
+54827
+108982
+111705
+63154
+94992
+147190
+90948
+138888
+134520
+137666
+130558
+81806
+92769
+130727
+105700
+71253
+68850
+88345
+131670
+123817
+115542
+112023
+72065
+126939
+67192
+94812
+133914
+132832
+111445
+73006
+97852`;
+console.log(massString);
+
+// .split("\n") split with new line -> array of strings -> .map(Number) convert to array of numbers
+var massNumber = massString.split("\n").map(Number);
+console.log(massNumber);
+
+// calculate fuel. Divided by 3, rounded down, then minus 2.
+
+var massFuel = [];
+for (var i = 0; i < massNumber.length; i++) {
+    massFuel[i] = Math.floor(massNumber[i] / 3) - 2;
+    }
+console.log(massFuel);
+
+// getting SUM of all fuel. Don't understand reduce() T__T
+var totalMassFuel = massFuel.reduce(function(a,b){ 
+    return a + b;
+    }, 0);
+
+console.log("Total fuel for mass = " + totalMassFuel);
+
+// Part 2
+
+//testing sum of one value
+/*
+var totalFuelTest = 0;
+while (massNumber[0] > 0) {
+    massNumber[0] = Math.floor(massNumber[0] / 3) - 2;
+    if (massNumber[0] > 0) {
+     totalFuelTest += massNumber[0];   
+    }
+}
+console.log(totalFuelTest);
+*/
+
+
+var part2Fuel = massNumber;
+var part2TotalFuel = 0;
+
+for (var i = 0; i < part2Fuel.length; i++){ // go through each line of array
+    while (part2Fuel[i] > 0) { // go through below formula until the value is zero or negative
+        part2Fuel[i] = Math.floor(part2Fuel[i] / 3) - 2;
+        if (part2Fuel[i] > 0) { // to exclude zero or negative value from the SUM
+        part2TotalFuel += part2Fuel[i];
+        }
+    }
+}
+console.log(part2Fuel);
+console.log(part2TotalFuel);
+
+</script>
