@@ -3,13 +3,84 @@
 /*
 Day 3 Part 1
 To do list
-[ ] get all coordinates of firstLine and secondLine
-    [ ] function for instructions > convert UDLR into function
-[ ] find all overlapping coordinates between firstLine and secondLine
-[ ] absolute
+
+[/] function for instructions > convert U5,D7,L5,R3,.. into nested array [str,int] -> e.g. [["U",5],["D",7],["L",5],["R",3]]
+[ ] function to get all coordinates of firstLine and secondLine
+[ ] find -> array of all overlapping coordinates between firstLine and secondLine
+    [ ] compare coord of secondLine with firstLine
+    [ ] add those coord to new array
+[ ] convert new array -> SUM of absolute value for each array |xCoord|+|yCoord|
+^v which first ?
+[ ] choose minimum value = manhattan distance
 
 
 */
 
 
+// function to convert instructions to be usable
+function convertInst(rawInst, instArray){
+
+    rawInst = rawInst.split(",")
+    for (var i = 0; i < rawInst.length; i++){
+        instArray[i] = rawInst[i].split("");
+        instArray[i][1] = parseInt(instArray[i][1]);
+    }
+};
+
+//test function
+
+var testPath = [["D",2],["R",3],["U",2],["L",3]];
+var blankWire = [[0,0]];
+
+// how to push new value from variable or formula to an array ??
+
+for (var i = 0; i < testPath.length; i++){
+    var tempArray = [];
+    var lastItem = blankWire[blankWire.length-1];
+    tempArray[i] = [lastItem[0],lastItem[1]]; // need to read about javascript value vs reference
+
+	if (testPath[i][0] == "U"){
+		for (var n = 0; n < testPath[i][1]; n++){
+        tempArray[i][0] += 1;
+        var temp2 = [tempArray[i][0],tempArray[i][1]]; // need to read about javascript value vs reference
+		blankWire.push(temp2);	
+		}
+    }
+    else console.log("did nothing");
+    
+};
+console.log(blankWire);
+
+// function to get all xCoord yCoord of wires
+function wireInst(instArray,wireArray){
+    /*switch (){
+        case U:
+            break;
+        case D:
+            break;
+        case L:
+            break;
+        case R:
+            break;
+    }*/
+};
+
+
+// test program per example
+/*
+var r1stInst = "R8,U5,L5,D3";
+var r2ndInst = "U7,R6,D4,L4";
+var firstInst = [];
+var secondInst = [];
+convertInst(r1stInst, firstInst);
+console.log(firstInst);
+convertInst(r2ndInst, secondInst);
+console.log(secondInst);
+
+var firstWire = [[0,0]];
+var secondWire = [[0,0]];
+
+wireInst(firstInst,firstWire);
+console.log(firstWire);
+*/
 </script>
