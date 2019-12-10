@@ -5,19 +5,17 @@ Day 3 Part 1
 To do list
 
 [/] function for instructions > convert U5,D7,L5,R3,.. into nested array [str,int] -> e.g. [["U",5],["D",7],["L",5],["R",3]]
-[ ] function to get all coordinates of firstLine and secondLine
-[ ] find -> array of all overlapping coordinates between firstLine and secondLine
+[/] function to get all coordinates of firstLine and secondLine
+[ ] find -> array of all overlapping coordinates(duplicate?) between firstLine and secondLine
     [ ] compare coord of secondLine with firstLine
-    [ ] add those coord to new array
+    [ ] add those coord to create array of all overlappping coords.
 [ ] convert new array -> SUM of absolute value for each array |xCoord|+|yCoord|
-^v which first ?
 [ ] choose minimum value = manhattan distance
-
 
 */
 
 
-// function to convert instructions to be usable
+// function to convert path instructions to be nested array [["str",int],["str",int],["str",int],...]
 function convertInst(rawInst, instArray){
 
     rawInst = rawInst.split(",")
@@ -28,7 +26,7 @@ function convertInst(rawInst, instArray){
 };
 
 //test function
-
+/*
 var testPath = [["D",2],["R",3],["U",2],["L",3]];
 var blankWire = [[0,0]];
 
@@ -37,12 +35,12 @@ var blankWire = [[0,0]];
 for (var i = 0; i < testPath.length; i++){
     var tempArray = [];
     var lastItem = blankWire[blankWire.length-1];
-    tempArray[i] = [lastItem[0],lastItem[1]]; // need to read about javascript value vs reference
+    tempArray[0] = lastItem.slice(); //[lastItem[0],lastItem[1]]; // need to read about javascript value vs reference
 
 	if (testPath[i][0] == "U"){
 		for (var n = 0; n < testPath[i][1]; n++){
-        tempArray[i][0] += 1;
-        var temp2 = [tempArray[i][0],tempArray[i][1]]; // need to read about javascript value vs reference
+        tempArray[0][0]++;
+        var temp2 = tempArray[0].slice(); //[tempArray[0][0],tempArray[0][1]]; // need to read about javascript value vs reference
 		blankWire.push(temp2);	
 		}
     }
@@ -50,19 +48,44 @@ for (var i = 0; i < testPath.length; i++){
     
 };
 console.log(blankWire);
-
+*/
 // function to get all xCoord yCoord of wires
-function wireInst(instArray,wireArray){
-    /*switch (){
-        case U:
-            break;
-        case D:
-            break;
-        case L:
-            break;
-        case R:
-            break;
-    }*/
+function wireInst(instArray, wireArray){
+    for (var i = 0; i < instArray.length; i++){
+        var lastItem = wireArray[wireArray.length-1]; // get last coordinate
+        var tempArray = [];
+        tempArray[0] = lastItem.slice(); // prepare value to use in switch case
+        switch (instArray[i][0]){
+            case "U":
+                for (var n = 0; n < instArray[i][1]; n++){
+                    tempArray[0][1]++; // y+1
+                    var temp2 = tempArray[0].slice(); // prepare value to push
+                    wireArray.push(temp2); // push coordinate to store in the nested array
+                }
+                break;
+            case "D":
+                for (var n = 0; n < instArray[i][1]; n++){
+                    tempArray[0][1]--; // y-1
+                    var temp2 = tempArray[0].slice(); 
+                    wireArray.push(temp2);
+                }
+                break;
+            case "L":
+                for (var n = 0; n < instArray[i][1]; n++){
+                    tempArray[0][0]--; // x-1
+                    var temp2 = tempArray[0].slice(); 
+                    wireArray.push(temp2);
+                }
+                break;
+            case "R":
+                for (var n = 0; n < instArray[i][1]; n++){
+                    tempArray[0][0]++; // x+1
+                    var temp2 = tempArray[0].slice(); 
+                    wireArray.push(temp2);
+                }
+                break;
+        }
+    }
 };
 
 
@@ -82,5 +105,17 @@ var secondWire = [[0,0]];
 
 wireInst(firstInst,firstWire);
 console.log(firstWire);
+wireInst(secondInst,secondWire);
+console.log(secondWire);
 */
+// find duplicate
+function wireOverlap (aWire,bWire,overlapCoord) {
+var tempWire = concat(aWire,bWire);
+var overlapCoord = [];
+    for (var i = 0; i < aWire.length; i++){
+        
+    }
+};
+
+
 </script>
