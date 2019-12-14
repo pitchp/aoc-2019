@@ -44,8 +44,20 @@ function partOneRange(start,finish,resultArr) {
 }
 function partTwoRange(partOneArr,partTwoArr){
 
-
-
+    var temp = partOneArr.slice();
+    
+    for (var i = 0; i < temp.length; i++){
+        temp[i] = partOneArr[i].toString().split("");
+        var numCount = {"0":0,"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0}; // flush value at the start of the loop
+        for (var n = 0; n < 6; n++){
+            if (temp[i][n] in numCount){
+                numCount[temp[i][n]] += 1 ;
+            }
+        }
+        if (Object.values(numCount).indexOf(2) != -1){
+            partTwoArr.push(partOneArr[i]);
+        }
+    }
 }
 var startVal = 357253;
 var finishVal = 892942;
@@ -53,7 +65,7 @@ var part1Arr = [];
 var part2Arr = [];
 partOneRange(startVal,finishVal,part1Arr);
 console.log(`Answer to Day 4 part 1 is ${part1Arr.length}`);
-
-
+partTwoRange(part1Arr,part2Arr);
+console.log("Answer to Day 4 part 2 is " + part2Arr.length);
 
 </script>
